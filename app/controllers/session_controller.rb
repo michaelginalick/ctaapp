@@ -14,11 +14,11 @@ class SessionController < ApplicationController
 
   def login
     @user = get_user(params[:user])
-    if @user && @user.authenticate(params[:user][:password])
+    if @user && @user.authenticate(params[:phone])
       session[:user_id] = @user.id
       redirect_to user_path(@user)
     else
-      flash[:notice] = "Invalid username or password"
+      flash[:notice] = "Phone number must be unique"
       redirect_to root_path
     end
   end
@@ -32,7 +32,7 @@ class SessionController < ApplicationController
   protected
 
   def get_user(user_params)
-    User.find_by(email: user_params[:email])
+    User.find_or_create_by(email: user_params[:phone])
   end
 	
 end
