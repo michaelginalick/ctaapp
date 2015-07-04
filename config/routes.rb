@@ -6,7 +6,11 @@ Rails.application.routes.draw do
   root 'sessions#index'
 
   # Example of regular route:
-    get 'sessions/notice' => 'sessions#notice'
+  get 'sessions/notice' => 'sessions#notice'
+      #sessions routes
+  get '/session/index' => 'session#index'
+  post '/session/login' => 'session#login'
+  get '/session/logout' => 'session#logout', :as => 'logout'
 
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
