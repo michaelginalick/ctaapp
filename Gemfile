@@ -31,6 +31,17 @@ gem 'spring'
 
 gem 'twitter-bootstrap-rails'
 
+# Text messaging service
+gem "twilio-ruby"
+
+# Parse CTA API XML response data 
+gem 'nokogiri'
+
+# Job queue
+gem 'sidekiq'
+gem 'redis'
+gem 'foreman'
+
 group :test, :development do
    gem 'rspec-rails'
    gem 'capybara'
@@ -44,6 +55,11 @@ end
 
 group :production do
 	gem 'rails_12factor' #heroku gem
+	gem 'nokogiri'
+	# Job queue
+	gem 'sidekiq'
+	gem 'redis'
+	gem 'foreman'
 end
 
 
