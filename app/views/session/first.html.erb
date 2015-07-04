@@ -1,0 +1,23 @@
+<div class="phone splash">
+	<div class="phone align">
+
+	<!-- 	<form id="continue" class='pure-form pure-form-stacked' action="/login" method="post">
+			
+			
+
+			<input id="phone-number" type="text" name="phone" placeholder="Ex: 2223334444" maxlength="10" autofocus>
+
+			
+		
+		</form> -->
+
+
+
+		<%= form_for(:user, url: {action: "login"}, html: {class: "pure-form pure-form-stacked", id:'continue' }) do |f| %>
+			<label class="lead">Please enter your cell phone number below:</label>
+  		<%= f.text_field :phone, placeholder: '2225559909' %>
+  		<input class="pure-button cta" type="submit" value="Continue">
+		<% end %>
+	
+	</div>
+</div>

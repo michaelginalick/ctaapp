@@ -3,13 +3,15 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'sessions#index'
+  root 'session#index'
 
   # Example of regular route:
-  get 'sessions/notice' => 'sessions#notice'
+  get 'session/notice' => 'session#notice'
       #sessions routes
   get '/session/index' => 'session#index'
+  get 'session/first' => 'session#first'
   post '/session/login' => 'session#login'
+  
   get '/session/logout' => 'session#logout', :as => 'logout'
 
   resources :users do
