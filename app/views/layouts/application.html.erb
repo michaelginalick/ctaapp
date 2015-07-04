@@ -8,6 +8,47 @@
 </head>
 <body>
 
+	  <nav class="navbar navbar-inverse" role="navigation">
+
+            <div class="navbar-header">
+
+                <% if logged_in? %>
+                
+                    <button id="collapse-logout" type="button" class="navbar-toggle" data-toggle="collapse" 
+                    data-target="#bs-example-navbar-collapse-9">
+
+                        <span class="sr-only">Toggle navigation</span>
+                        
+                        <span class="icon-bar"></span>
+
+                        <span class="icon-bar"></span>
+                        
+                        <span class="icon-bar"></span>
+                    
+                    </button>
+            
+                <% end %>
+
+                <a class="navbar-brand" href="/">RightOn<i>Tracker</i></a>
+           
+            </div>
+
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-9">
+          
+                <ul class="nav navbar-nav pull-right">
+                
+                    <% if logged_in? %>
+
+                        <a class="pure-button" id="logout" href="/logout">Log Out</a>
+                    
+                    <% end %>
+
+                </ul>
+            
+            </div>        
+        
+        </nav>
+
 <%= yield %>
 
 </body>

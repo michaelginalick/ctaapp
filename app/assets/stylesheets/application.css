@@ -13,3 +13,260 @@
  *= require_tree .
  *= require_self
  */
+
+
+/*NavBar*/
+
+nav.navbar.navbar-inverse {
+    padding-bottom: 0;
+    margin-bottom: 0;
+    border-radius: 0px;
+    background-color: #0079C2;
+}
+
+.container-fluid {
+    min-width: 200px;
+}
+
+.navbar-inverse .navbar-brand {
+    color: white;
+    font-size: 2.5em;
+}
+
+
+#logout {
+    background-color: #D31146;
+    color: white;
+    height: 2em;
+    margin-top: .75em;
+    text-decoration: none;
+}
+
+#collapse-logout{
+    background-color: #D31146;
+}
+
+/*Layout*/
+
+
+.splash {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+    background-color: #191818;
+}
+
+.align {
+    text-align: center;
+    color: white;
+    width: 50%;
+    min-width: 200px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 10%;
+    height: 100vh;
+}
+
+/*Shared Button Classes*/
+
+.pure-button.cta {
+    font-size: 1.5em;
+    text-decoration: none;
+    background-color: #0079C2;
+    color: white;
+    margin-top: 1em;
+}
+
+.pure-button.cta:hover {
+    color: #D31146;
+}
+
+/*Homepage*/
+
+#slogan {
+    font-size: 2.3em;
+}
+
+.promo {
+    text-align: center;
+    color: white;
+    width: 50%;
+    min-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 10%;
+}
+
+.lead {
+    letter-spacing: .06em;
+    font-size: 1.3em;
+    color: white;
+}
+
+#home-link {
+    color: orange;
+}
+
+h3 {
+    margin-top: 4em;
+}
+
+/*Login page*/
+
+.phone.align, .confirm.align {
+    width: 40%;
+}
+
+#phone-number {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2em;
+    margin-bottom: .5em;
+    font-size: 1.0em;
+    color:black;
+}
+
+/*Confirm page*/
+
+#pin {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2em;
+    margin-bottom: .5em;
+    font-size: 1.5em;
+    color:black;
+}
+
+#submit-pin, #receive-pin {
+    display: inline;
+}
+
+#receive-pin {
+    margin-left: .5em;
+}
+
+#notice-header {
+    font-size: 2.2em;
+}
+
+/*Profile*/
+
+.pure-button.cta.delete, .pure-button.delete {
+    background-color:#D31146;
+    color: white;
+}
+
+.pure-table {
+   margin-top: 3%;
+   margin-bottom: 5%;
+}
+
+.pure-input-1-2 {
+    font-size: 1.5em;
+    color: black;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#select-time {
+    width:auto;
+}
+
+.pure-checkbox {
+    font-size: 1.2em;
+    font-style: italic;
+}
+
+.profile{
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-color: #191818;
+}
+
+.holder {
+    color: white;
+    width: 60%;
+    min-width: 500px;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 3%;
+}
+
+.divider {
+    margin-bottom: 1%;
+    margin-top: -1%;
+    width: 50%;
+}
+
+.pure-form {
+    margin-bottom: -5%;
+}
+
+label {
+    font-size: 1.3em;
+}
+
+.hidden {
+    display: none;
+}
+
+#add-stop {
+    margin-bottom: 3.5em;
+}
+
+/*Notice page*/
+
+
+#back {
+    margin-right: .8em;
+}
+
+#back:hover {
+    color: #0079C2;
+}
+
+#acknowledge {
+    width: 5.7em;
+    margin-left: .5em;
+}
+
+.confirm.align.notice {
+    width: 80%;
+}
+
+@media only screen and (min-width: 720px) {
+    .home.splash {
+        background-image: url(/images/cta_train.jpg);
+    }
+    .phone.splash {
+        background-image: url(/images/train_aisle.jpg);
+    }
+    .confirm.splash {
+        background-image: url(/images/train_passing.jpg);
+    }
+    .notice.splash {
+        background-image: url(/images/train_crossing.jpg);
+    }
+    .profile {
+        background-image: url(/images/two_trains.jpg);
+    }
+    .error {
+        background-image: url(/images/bw_map.jpg);
+    }
+    #slogan {
+        font-size: 3em;
+    }
+    .lead {
+        font-size: 2em;
+    }
+    #notice-header {
+        font-size: 3.5em;
+    }
+}
