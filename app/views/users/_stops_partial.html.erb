@@ -1,0 +1,63 @@
+<% if @user.trains.any? %>
+	
+	<h1 id="stop-table-header">Your stops</h1>
+	
+	<hr align="left" class="divider">
+	
+	<table class='pure-table'>
+		
+		<thead>
+
+			<tr>
+				<th>
+					Stop
+				</th>
+
+				<th>
+					Time
+				</th>
+
+				<th>
+					Days
+				</th>
+
+				<th>
+					Delete
+				</th>
+			</tr>
+
+		</thead>
+		
+		<% n = 1 %>
+		<% @user.trains.each do |train| %>
+		
+		<tbody>
+
+			<tr id="stop-<%= n %>">
+
+				<td> <b><%= train.line %></b> - <%= stops[train.stop] %> </td>
+
+				<% if Time.now.dst? %>
+					<td> <%= (train.time + Time.zone_offset('CDT')).strftime("%I:%M %p") %> </td>
+				<% else %>
+					<td> <%= (train.time + Time.zone_offset('CDT') - 3600).strftime("%I:%M %p") %> </td>
+				<% end %>
+
+				<td> <%= day_converter(train.days)%> </td>
+				
+				<td>
+
+					<form class="delete-stop" id="delete-stop-<%= n %>" action='/users/<%= @user.id %>/trains/<%= train.id %>' method="post">
+						<input class="pure-button delete unique" id="delete-train" type="submit" value="Delete">
+					</form>
+				
+				</td>
+			</tr>
+
+			<% n+= 1 %>
+		<% end %>
+		
+		</tbody>
+		
+	</table>
+<% end %>
