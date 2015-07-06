@@ -32,7 +32,7 @@ class UserController < ApplicationController
 		@client.account.messages.create(
 			:body => "Message from RightOnTracker:\nYour pin is #{pin}.",
 			:to => "+1#{@user.phone}",
-		:from => ENV['TWILIO_NUMBER'])
+			:from => ENV['TWILIO_NUMBER'])
 
 		halt 200, "Pin sent!"
 	end
