@@ -14,13 +14,24 @@
 ActiveRecord::Schema.define(version: 20150704051359) do
 
   create_table "trains", force: true do |t|
+    t.datetime "time"
+    t.string   "line"
+    t.string   "stop"
+    t.integer  "user_id"
+    t.string   "days"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+  add_index "trains", ["user_id"], name: "index_trains_on_user_id"
+
   create_table "users", force: true do |t|
+    t.string   "phone"
+    t.string   "password_digest"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "users", ["id"], name: "index_users_on_id"
 
 end
