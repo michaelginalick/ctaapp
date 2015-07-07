@@ -14,8 +14,8 @@ Rails.application.routes.draw do
   
   get '/session/logout' => 'session#logout', :as => 'logout'
 
-  resources :users do
-    resources :trains
+  resources :user do
+    resources :train
   end
 
   # Example of named route that can be invoked with purchase_url(id: product.id)
