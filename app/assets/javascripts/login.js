@@ -14,6 +14,7 @@ $(document).ready(function(){
 
 				$('.lead').text("Number must be ten digits.");
 				restorePhoneDiv();
+				
 			} else if ($('#phone-number').val().charAt(0) === "1"){
 				freezePhoneDiv(event, height, width);
 				$('.lead').text("Area code and number only, please.");
