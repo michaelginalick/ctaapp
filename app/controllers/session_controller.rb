@@ -21,7 +21,7 @@ class SessionController < ApplicationController
       @user.password_digest = pin
       @user.save!
       session[:user_id] = @user.id
-      redirect_to user_path(@user)
+      redirect_to user_path(User.find(session[:user_id])) if session[:user_id] != nil
     else
       flash[:notice] = "Phone number must be unique"
       redirect_to root_path

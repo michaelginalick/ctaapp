@@ -14,12 +14,10 @@
 			<input class="pure-button cta" type="submit" value="Submit Pin">
 		
 		</form>
-		
-		<form id='receive-pin' action="/users/<%= @user.id %>/code" method="post">
 
-			<input class="hidden" type="text" value="<%= @user.id %>" name="id">
-
+		<%= form_for(:user, url: {action: "code"}, html: {id: "recieve-pin"}) do |f| %>
 			<input class="pure-button cta" type="submit" value="Receive Pin">
+			<%end%>
 		
 		</form>
 

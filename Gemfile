@@ -42,6 +42,7 @@ gem 'nokogiri'
 gem 'sidekiq'
 gem 'redis'
 gem 'foreman'
+gem 'dotenv-rails', :groups => [:development, :test, :production]
 
 group :test, :development do
    gem 'rspec-rails'

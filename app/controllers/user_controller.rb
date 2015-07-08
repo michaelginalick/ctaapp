@@ -15,7 +15,7 @@ class UserController < ApplicationController
 	def code	
 		@user = User.find(session[:user_id])
 		pin = (rand * 10000).floor.to_s
-		@user.password = pin
+		@user.password_digest = pin
 		@user.save!
 
 		@client = create_client
@@ -25,6 +25,7 @@ class UserController < ApplicationController
 			:from => ENV['FROM'])
 
 		halt 200, "Pin sent!"
+		redirect_to(user_path(@user))
 	end
 
 
