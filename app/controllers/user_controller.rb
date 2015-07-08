@@ -6,7 +6,7 @@ class UserController < ApplicationController
 
 	def confirm
 		@user = User.find(session[:user_id])
-		if @user.password == params[:pin]
+		if @user.password_digest == params[:pin]
 			redirect_to(user_path(@user))
 		end
 	end
@@ -20,11 +20,9 @@ class UserController < ApplicationController
 
 		@client = create_client
 		@client.account.messages.create(
-			:body => "Message from RightOnTracker:\nYour pin is #{pin}.",
+			:body => "Message from CTA App:\nYour pin is #{pin}.",
 			:to => "+1#{@user.phone}",
 			:from => ENV['FROM'])
-
-		halt 200, "Pin sent!"
 		redirect_to(user_path(@user))
 	end
 

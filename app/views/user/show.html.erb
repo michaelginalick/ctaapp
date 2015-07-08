@@ -6,20 +6,16 @@
 			<p id='message-center'>Enter your pin below or click 'Receive Pin' to be texted a new one.</p>
 		
 		</div>
-		
-		<form class='pure-form pure-form-stacked' id="submit-pin" action='/users/<%= @user.id %>/confirm' method="post">
-			
-			<input id="pin" type="text" name="pin" placeholder="Enter your pin" maxlength="4" autofocus>
-			
+
+		<%= form_for(:user, url: {action: "confirm"}, html: {class: 'pure-form pure-form-stacked', id: "submit-pin"}) do |f| %>
+
+			<%= f.text_field :password_digest, placeholder: "Enter your pin", id: "pin", name: "pin", autofocus: true, maxlength: 4 %>
+
 			<input class="pure-button cta" type="submit" value="Submit Pin">
-		
-		</form>
+			<%end%>
 
 		<%= form_for(:user, url: {action: "code"}, html: {id: "recieve-pin"}) do |f| %>
 			<input class="pure-button cta" type="submit" value="Receive Pin">
 			<%end%>
-		
-		</form>
-
 	</div>
 </div>
