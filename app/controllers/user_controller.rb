@@ -1,29 +1,19 @@
 class UserController < ApplicationController
 
-	def profile 
-		'/users/:user_id'
-		@user = User.find(params[:user_id])
-		redirect '/login' unless @user.logged_in?(session) && session[:confirmed]
-		erb :"user/profile"
+	def show
+		@user = User.find(session[:user_id])
 	end
 
 	def confirm
-	 '/users/:user_id/confirm'
-		erb :"user/confirm"
-	end
-
-	def confirm
-	post '/users/:user_id/confirm'
+		@user = User.find(session[:user_id])
 		if @user.password == params[:pin]
-			session[:confirmed] = true
-			halt 200, "/users/#{@user.id}"
-		else
-			halt 400, "Pin is incorrect."
+			redirect_to(user_path(@user))
 		end
 	end
 
-	def profile	
-	post '/users/:user_id/code'
+
+	def code	
+		@user = User.find(session[:user_id])
 		pin = (rand * 10000).floor.to_s
 		@user.password = pin
 		@user.save!
@@ -32,7 +22,7 @@ class UserController < ApplicationController
 		@client.account.messages.create(
 			:body => "Message from RightOnTracker:\nYour pin is #{pin}.",
 			:to => "+1#{@user.phone}",
-			:from => ENV['TWILIO_NUMBER'])
+			:from => ENV['FROM'])
 
 		halt 200, "Pin sent!"
 	end

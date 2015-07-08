@@ -14,6 +14,9 @@ Rails.application.routes.draw do
   
   get '/session/logout' => 'session#logout', :as => 'logout'
 
+  post '/user/confirm' => 'user#confirm', :as => 'confirm'
+  post '/user/code' => 'user#code', :as => 'code'
+
   resources :user do
     resources :train
   end
