@@ -1,8 +1,7 @@
 $(document).ready(function(){
 
+		// Change train stops for each line selected
 		$(function() {
-
-    // Change train stops for each line selected
     $('#select-line').change(function() {
 
         var id = $(this).val();
@@ -10,7 +9,8 @@ $(document).ready(function(){
         $(".convenient").addClass("hidden");
 
         $("#" + id).removeClass("hidden");
-    });
+    	});
+		});
 
-});
+});		
 
