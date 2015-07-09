@@ -26,5 +26,9 @@ class UserController < ApplicationController
 		redirect_to(user_path(@user))
 	end
 
+	def profile
+		@user = User.find(session[:user_id])
+	end
+
 
 end
