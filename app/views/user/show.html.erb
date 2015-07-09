@@ -7,7 +7,7 @@
 		
 		</div>
 
-		<%= form_for(:user, url: {action: "confirm"}, html: {class: 'pure-form pure-form-stacked', id: "submit-pin"}) do |f| %>
+		<%= form_for(:user, url: {action: "profile"}, html: {class: 'pure-form pure-form-stacked', id: "submit-pin"}) do |f| %>
 
 			<%= f.text_field :password_digest, placeholder: "Enter your pin", id: "pin", name: "pin", autofocus: true, maxlength: 4 %>
 

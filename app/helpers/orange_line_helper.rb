@@ -1,4 +1,4 @@
-helpers do
+module OrangeLineHelper
 	def orange_line
 		orange_line = {}
 		

@@ -1,4 +1,4 @@
-helpers do
+module StopsHelper
 	def stops
 		stops = {}
 		

@@ -1,4 +1,4 @@
-helpers do
+module RedLineHelper
 	def red_line
 		red_line ={}
 

@@ -1,4 +1,4 @@
-helpers do
+module PurpleLineExpressHelper
 	def purple_line_exp
 		purple_line_exp = {}
 

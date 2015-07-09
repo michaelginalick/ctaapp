@@ -1,4 +1,4 @@
-helpers do
+module YellowLineHelper
 	def yellow_line
 		yellow_line = {}
 		

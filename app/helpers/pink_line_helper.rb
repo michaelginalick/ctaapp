@@ -1,4 +1,4 @@
-helpers do
+module PinkLineHelper
 
 	def pink_line
 		pink_line = {}

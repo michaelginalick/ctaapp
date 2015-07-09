@@ -1,4 +1,4 @@
-helpers do
+module BrownLineHelper
 	def brown_line
 		brown_line ={}
 

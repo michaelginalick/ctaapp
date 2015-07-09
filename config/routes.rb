@@ -17,7 +17,8 @@ Rails.application.routes.draw do
   post '/user/confirm' => 'user#confirm', :as => 'confirm'
   post '/user/code' => 'user#code', :as => 'code'
 
-  get '/user/profile' => 'user#profile', :as => 'profile'
+  post '/user/profile' => 'user#profile', :as => 'profile'
+
   resources :user do
     resources :train
   end

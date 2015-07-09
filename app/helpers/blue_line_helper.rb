@@ -1,4 +1,4 @@
-helpers do 
+module BlueLineHelper
 
 	def blue_line
 		blue_line = {}

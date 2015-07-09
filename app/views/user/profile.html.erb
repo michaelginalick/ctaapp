@@ -8,7 +8,7 @@
 		<div class="lead"><i><%= @user.phone.insert(3,'-').insert(7,'-') %></i></div>
 		
 		<div id="partials-div">
-			<%= erb :"user/_stops_partial", :layout => false %>
+			<%= render partial: "stops_partial" %>
 		</div>
 
 		<h1 id="stop-header">Add a new stop</h1>
@@ -26,7 +26,7 @@
 						
 						<select id="select-line" class="pure-input-1-2" name="line">
 							
-							<% lines.each do |line| %>
+							<% cta_lines.each do |line| %>
 								<option value="<%= line %>"><%= line %></option>
 							<% end %>
 						

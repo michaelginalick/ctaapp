@@ -28,6 +28,8 @@ class UserController < ApplicationController
 
 	def profile
 		@user = User.find(session[:user_id])
+		if @user.password_digest == params[:pin]
+		end
 	end
 
 

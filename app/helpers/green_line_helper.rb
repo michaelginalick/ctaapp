@@ -1,4 +1,4 @@
-helpers do
+module GreenLineHelper
 	def green_line
 		green_line ={}
 

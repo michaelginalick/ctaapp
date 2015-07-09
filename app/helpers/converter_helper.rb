@@ -1,4 +1,4 @@
-helpers do
+module ConverterHelper
 	def day_converter(days_scheduled_string)
 		days = {}
 		
