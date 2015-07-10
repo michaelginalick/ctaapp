@@ -12,5 +12,103 @@ $(document).ready(function(){
     	});
 		});
 
+
+		$('#new-stop').submit(function(event){
+
+			event.preventDefault();
+
+			if (!$("select-time").val() || $("input:checkbox:checked").length == 0) {
+
+				 $("#stop-header").text("Please enter a time and date.")
+
+            restoreStopHeader();
+      } else {
+      	var id = $("#user").val();
+
+      	$.ajax({
+      		      url: '/users/' + id + '/trains/create',
+               
+                method: 'POST',
+                
+                type: 'json',
+
+                data: {
+
+
+                	  time: $("#select-time").val(),
+                    
+                    line: $("#select-line").val(),
+                    
+                    // Workaround to dynamically match stop with line
+                    stop: $("#select-stop-" + $("#select-line").val().toLowerCase()).val(),
+
+                    days: {
+
+
+                    	  monday: $("#monday:checked").val(),
+                        
+                        tuesday: $("#tuesday:checked").val(),
+                        
+                        wednesday: $("#wednesday:checked").val(),
+                        
+                        thursday: $("#thursday:checked").val(),
+                        
+                        friday: $("#friday:checked").val(),
+                        
+                        saturday: $("#saturday:checked").val(),
+                        
+                        sunday: $("#sunday:checked").val()
+                    }
+                },
+                success: function(data) {
+
+                	  $("#stop-header").text(data);
+                    
+                    $('#partials-div').load('/users/' + id + '/stops');
+                    
+                    $("#new-stop").trigger('reset');
+                    
+                    // Default back to red line
+                    $(".convenient").addClass("hidden"); 
+                    
+                    $("#Red").removeClass("hidden");
+                    
+                    restoreStopHeader();
+                },
+
+                error: function(data) {
+                	                    //Prevent error dumps from rendering
+                    if (data["responseText"].length > 100) {
+                        
+                        $("#stop-header").text("An error has occured.");
+                    
+                    } else {
+                        
+                        $("#stop-header").text(data["responseText"]);
+                    }; 
+
+                    restoreStopHeader();
+                }
+      			});
+      	};
+
+		});
+
+	
+		    // Define functions
+    function restoreStopHeader() {
+
+        setTimeout(
+
+            function() {
+                
+                $('#stop-header').text("Add a new stop");
+            },
+        
+        3500);
+    };
+
+
+
 });		
 

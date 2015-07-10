@@ -15,7 +15,12 @@
 		
 		<hr align="left" class="divider">
 		
-		<form id="new-stop" class='pure-form pure-form-stacked' action='/users/<%= @user.id %>/trains/create' method="post">
+		<%= form_for(:train, url: { controller: "train", action: "create"}, html: {id: "new-stop", class: "pure-form pure-form-stacked"}) do |f| %>
+
+
+			
+
+
 			<fieldset>
 
 				<div class="pure-g">
@@ -202,13 +207,16 @@
 					
 					</div>
 
+
+
+
 					<input id="user" class="hidden" type="text" value="<%= @user.id %>" name="id">
 
 					<input id="add-stop" class="pure-button cta" type="submit" value="Add stop">
 				
 				</div>
 			</fieldset>
-		</form>
+		<%end%>
 
 		<h1> The Danger Zone </h1>
 		
@@ -218,7 +226,7 @@
 			
 			<input class="pure-button cta delete" id="delete-account" type="submit" value="Delete account">
 		
-		</form>
+		
 	
 	</div>
 </div>

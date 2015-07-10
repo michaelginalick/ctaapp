@@ -18,10 +18,11 @@ Rails.application.routes.draw do
   post '/user/code' => 'user#code', :as => 'code'
 
   post '/user/profile' => 'user#profile', :as => 'profile'
+  
+  resources :train
+  post 'user/:id/train' => 'train#create', :as => 'create'
 
-  resources :user do
-    resources :train
-  end
+
 
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
