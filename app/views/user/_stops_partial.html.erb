@@ -45,19 +45,13 @@
 
 				<td> <%= day_converter(train.days)%> </td>
 				
-				<td>
-
-					<form class="delete-stop" id="delete-stop-<%= n %>" action='/users/<%= @user.id %>/trains/<%= train.id %>' method="post">
+				<td> <%= form_for(@train, :url => destroy, html: {id: "delete-<%=n%>", class: "delete-stop"}) do |f| %>
 						<input class="pure-button delete unique" id="delete-train" type="submit" value="Delete">
-					</form>
-				
-				</td>
+						<%end%></td>
 			</tr>
 
 			<% n+= 1 %>
 		<% end %>
-		
 		</tbody>
-		
 	</table>
 <% end %>

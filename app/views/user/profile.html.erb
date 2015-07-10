@@ -15,11 +15,7 @@
 		
 		<hr align="left" class="divider">
 		
-		<%= form_for(:train, url: { controller: "train", action: "create"}, html: {id: "new-stop", class: "pure-form pure-form-stacked"}) do |f| %>
-
-
-			
-
+		<%= form_for(@train, :url => create_path(@user), html: {id: "new-stop", class: "pure-form pure-form-stacked"}) do |f| %>
 
 			<fieldset>
 

@@ -27,10 +27,17 @@ class UserController < ApplicationController
 	end
 
 	def profile
+		@train = Train.new
 		@user = User.find(session[:user_id])
 		if @user.password_digest == params[:pin]
 		end
 	end
+
+
+  def stop
+  	@user = User.find(session[:user_id])
+  	render :"user/_stops_partial", :layout => false
+  end
 
 
 end

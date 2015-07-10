@@ -17,10 +17,6 @@ $(document).ready(function(){
 
 			event.preventDefault();
 
-			var x = $("#select-time").val();
-
-			console.log(x);
-
 			if (!$("#select-time").val() || $("input:checkbox:checked").length == 0) {
 
 				 $("#stop-header").text("Please enter a time and date.")
@@ -30,7 +26,7 @@ $(document).ready(function(){
       	var id = $("#user").val();
 
       	$.ajax({
-      		      url: '/user/' + id + '/train/create',
+      		      url: '/user/' + id + '/train/',
                
                 method: 'POST',
                 
@@ -68,7 +64,7 @@ $(document).ready(function(){
 
                 	  $("#stop-header").text(data);
                     
-                    $('#partials-div').load('/users/' + id + '/stops');
+                    $('#partials-div').load('/user/' + id + '/stop');
                     
                     $("#new-stop").trigger('reset');
                     

@@ -19,10 +19,13 @@ Rails.application.routes.draw do
 
   post '/user/profile' => 'user#profile', :as => 'profile'
 
+
+
   resources :user do 
     resources :train
   end
     post '/user/:id/train' => 'train#create', :as => 'create'
+    get '/user/:id/stop' => 'user#stop', :as => 'stop'
 
 
 
