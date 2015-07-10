@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   root 'session#index'
 
   # Example of regular route:
-  get 'session/notice' => 'session#notice'
+  get '/session/notice' => 'session#notice'
       #sessions routes
   get '/session/index' => 'session#index'
   get 'session/first' => 'session#first'
@@ -18,9 +18,11 @@ Rails.application.routes.draw do
   post '/user/code' => 'user#code', :as => 'code'
 
   post '/user/profile' => 'user#profile', :as => 'profile'
-  
-  resources :train
-  post 'user/:id/train' => 'train#create', :as => 'create'
+
+  resources :user do 
+    resources :train
+  end
+    post '/user/:id/train' => 'train#create', :as => 'create'
 
 
 
