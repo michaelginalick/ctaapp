@@ -4,7 +4,7 @@
 	
 	<hr align="left" class="divider">
 	
-	<table class='pure-table'>
+	<table class="pure-table">
 		
 		<thead>
 
@@ -35,7 +35,9 @@
 
 			<tr id="stop-<%= n %>">
 
-				<td> <b><%= train.line %></b> - <%= stops[train.stop] %> </td>
+				<td> 
+					<b><%= train.line %></b> - <%= stops[train.stop] %> 
+				</td>
 
 				<% if Time.now.dst? %>
 					<td> <%= (train.time + Time.zone_offset('CDT')).strftime("%I:%M %p") %> </td>
@@ -43,14 +45,18 @@
 					<td> <%= (train.time + Time.zone_offset('CDT') - 3600).strftime("%I:%M %p") %> </td>
 				<% end %>
 
-				<td> <%= day_converter(train.days)%> </td>
+				<td> 
+					<%= day_converter(train.days)%> 
+				</td>
 				
-				<td> <%= form_for(@train, :url => destroy, html: {id: "delete-<%=n%>", class: "delete-stop"}) do |f| %>
-						<input class="pure-button delete unique" id="delete-train" type="submit" value="Delete">
-						<%end%></td>
+				<td> 
+						<%= form_for(:train, html: { class: "delete-stop", :method => :delete}) do |f| %>
+							<%=f.text_field :train, :value => train.id, :type => "hidden" %>
+							<input class="pure-button delete unique" id="delete-train" type="submit" value="Delete">
+						<%end%>
+				</td>
 			</tr>
-
-			<% n+= 1 %>
+			<% n += 1 %>
 		<% end %>
 		</tbody>
 	</table>

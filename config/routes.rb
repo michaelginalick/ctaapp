@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   post '/user/code' => 'user#code', :as => 'code'
 
   post '/user/profile' => 'user#profile', :as => 'profile'
+  get 'user/profile' => 'user#profile', :as => 'userprofile'
 
 
 

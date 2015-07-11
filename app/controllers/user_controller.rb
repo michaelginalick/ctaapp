@@ -39,5 +39,13 @@ class UserController < ApplicationController
   	render :"user/_stops_partial", :layout => false
   end
 
+  def destroy
+    @user = User.find(session[:user_id])
+    @stop = Train.find(params[:train].values[0].to_i)
+
+    @stop.destroy
+
+    redirect_to(profile_path)
+    end
 
 end
