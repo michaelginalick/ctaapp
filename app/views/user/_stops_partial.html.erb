@@ -50,10 +50,9 @@
 				</td>
 				
 				<td> 
-						<%= form_for(:train, html: { class: "delete-stop", :method => :delete}) do |f| %>
-							<%=f.text_field :train, :value => train.id, :type => "hidden" %>
-							<input class="pure-button delete unique" id="delete-train" type="submit" value="Delete">
-						<%end%>
+
+							<input class="pure-button delete unique" id="delete-train" title=<%=train.id%> type="submit" value="Delete" >
+						
 				</td>
 			</tr>
 			<% n += 1 %>

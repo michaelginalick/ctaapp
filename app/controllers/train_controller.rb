@@ -1,7 +1,7 @@
 class TrainController < ApplicationController
 
   def create
-  	@user = User.find(session[:user_id])
+    @user = User.find(session[:user_id])
 
     if @user.trains.length < 50
       day_string = ''
@@ -20,9 +20,9 @@ class TrainController < ApplicationController
       #SendTimes.perform_at(@train.time, @train.id)
 
 
-    if request.xhr?
-      render :json => @train
-    end
+      if request.xhr?
+        render :json => @train
+      end
 
 
       "Stop added!"
@@ -30,24 +30,18 @@ class TrainController < ApplicationController
       #redirect_to(profile_path(@user))
 
     else
-    	redirect_to(profile_path(@user))
+      redirect_to(profile_path(@user))
       "Limit of three train stops exceeded!"
     end
 
-    def destroy
-    	@user = User.find(session[:user_id])
-    	@stop = Train.find(user_id: @user, train: params[:train])
-
-    	@stop.destroy
-
-    	redirect_to(profile_path(@user))
-    end
-
-
-
-
   end
 
+  def destroy
+    @user = User.find(session[:user_id])
+    @stop = Train.find(params[:id])
+    @stop.destroy
+    redirect_to(profile_path)
+  end
 
 
 

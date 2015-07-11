@@ -27,20 +27,21 @@
 
         event.preventDefault();
         
-        var id = $("#user").val();
-        console.log(id);
+           var id = $("#user").val();
+           var train_id = $("#delete-train").attr("title");
+           train_id = parseInt(train_id);
 
         $.ajax({
 
-            url: $(".delete-stop").attr("action"),
+            url: '/user/' + id + '/train/' + train_id,
 
-            method: 'POST',
+            method: 'DELETE',
 
             dataType: 'text',
 
             success: function(data) {
 
-                $('#partials-div').load('/users/' + id + '/stops');
+                $('#partials-div').load('/user/' + id + '/stop');
             },
 
             error: function(data) {

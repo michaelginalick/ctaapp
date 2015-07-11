@@ -27,12 +27,11 @@ class UserController < ApplicationController
 	end
 
 	def profile
-		@train = Train.new
-		@user = User.find(session[:user_id])
-		if @user.password_digest == params[:pin]
-		end
+			@train = Train.new
+			@user = User.find(session[:user_id])
+			if @user.password_digest == params[:pin] 
+			end
 	end
-
 
   def stop
   	@user = User.find(session[:user_id])
@@ -41,11 +40,9 @@ class UserController < ApplicationController
 
   def destroy
     @user = User.find(session[:user_id])
-    @stop = Train.find(params[:train].values[0].to_i)
-
-    @stop.destroy
-
-    redirect_to(profile_path)
+		if request.xhr?
+        render :json => @user
     end
+  end
 
 end
