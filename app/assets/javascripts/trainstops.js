@@ -27,20 +27,7 @@ $(document).ready(function(){
                     // Workaround to dynamically match stop with line
                     stop: $("#select-stop-" + $("#select-line").val().toLowerCase()).val(),
                     days: {
-
-                    	monday: $("#monday:checked").val(),
-                        
-                        tuesday: $("#tuesday:checked").val(),
-                        
-                        wednesday: $("#wednesday:checked").val(),
-                        
-                        thursday: $("#thursday:checked").val(),
-                        
-                        friday: $("#friday:checked").val(),
-                        
-                        saturday: $("#saturday:checked").val(),
-                        
-                        sunday: $("#sunday:checked").val()
+                            dataDays();
                     }
                 },
                 success: function(data) {
@@ -60,7 +47,7 @@ $(document).ready(function(){
                 },
 
                 error: function(data) {
-                	                    //Prevent error dumps from rendering
+                	//Prevent error dumps from rendering
                     if (data["responseText"].length > 100) {
                         
                         $("#stop-header").text("An error has occured.");
@@ -91,7 +78,24 @@ $(document).ready(function(){
         3500);
     };
 
+    function dataDays() {
+        var days = 
 
+                    monday: $("#monday:checked").val(),
+                        
+                    tuesday: $("#tuesday:checked").val(),
+                        
+                    wednesday: $("#wednesday:checked").val(),
+                        
+                    thursday: $("#thursday:checked").val(),
+                        
+                    friday: $("#friday:checked").val(),
+                        
+                    saturday: $("#saturday:checked").val(),
+                        
+                    sunday: $("#sunday:checked").val()
+        return days;        
+    };
 
 });		
 
