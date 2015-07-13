@@ -41,7 +41,7 @@ $(document).ready(function(){
 
                     $("#stop-header").text(data);
                     
-                    $('#partials-div').load('/user/' + id + '/stop');
+                    $('#partials-div').load('/user/' + getUserId() + '/stop');
                     
                     $("#new-stop").trigger('reset');
                     
