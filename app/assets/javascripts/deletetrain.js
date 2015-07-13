@@ -2,13 +2,9 @@
     $("#delete-account-form").submit(function(event) {
 
         if ($("#delete-account").val() == "Are you sure?") {
-
             return true;
-
         } else {
-
             $("#delete-account").val("Are you sure?");
-
             return false;
         };
     });
@@ -17,7 +13,6 @@
     $(document).click(function(event) {
 
         if (!$(event.target).is('#delete-account')) {
-
             $("#delete-account").val("Delete account");
         };
     });

@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
 		return Twilio::REST::Client.new(account_sid, auth_token)
 	end
 
-	def train_stuff
+	def train_stuffs
 
    		get_days
 
@@ -25,7 +25,7 @@ class ApplicationController < ActionController::Base
       set_time_save_train
 
       #SendTimes.perform_at(@train.time, @train.id)
-      
+
       if request.xhr?
         render :json => @train
       end
@@ -33,7 +33,7 @@ class ApplicationController < ActionController::Base
   end 
 
   def get_days
-  	 if @user.trains.length < 50
+  	 if @user.trains.length < 3
        day_string = ''
 
         params[:days].each_value do |value|
@@ -43,7 +43,8 @@ class ApplicationController < ActionController::Base
 
         end
       else
-      redirect_to(profile_path(@user))
+      	flash[:notice] = "Too many trains!"
+      	redirect_to(profile_path(@user))
      end	
   end
 
