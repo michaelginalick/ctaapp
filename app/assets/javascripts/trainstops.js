@@ -94,20 +94,19 @@ $(document).ready(function(){
 
     function dataDays() {
         var days = 
-
-                    monday: $("#monday:checked").val(),
+                monday: $("#monday:checked").val(),
                         
-                    tuesday: $("#tuesday:checked").val(),
+                tuesday: $("#tuesday:checked").val(),
                         
-                    wednesday: $("#wednesday:checked").val(),
+                wednesday: $("#wednesday:checked").val(),
                         
-                    thursday: $("#thursday:checked").val(),
+                thursday: $("#thursday:checked").val(),
                         
-                    friday: $("#friday:checked").val(),
+                friday: $("#friday:checked").val(),
                         
-                    saturday: $("#saturday:checked").val(),
+                saturday: $("#saturday:checked").val(),
                         
-                    sunday: $("#sunday:checked").val()
+                sunday: $("#sunday:checked").val()
         return days;        
     };
 
