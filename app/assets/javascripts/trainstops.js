@@ -16,13 +16,20 @@ $(document).ready(function(){
             $("#stop-header").text("Please enter a time and date.")
             restoreStopHeader();
         } else {
-      	    var id = $("#user").val();
-      	     $.ajax({
-      		    url: '/user/' + id + '/train/',
+
+      	    ajaxCall();
+	});
+
+
+
+
+    var ajaxCall = function() {
+           $.ajax({
+                url: '/user/' + getUserId() + '/train/',
                 method: 'POST',
                 type: 'json',
                 data: {
-                	time: $("#select-time").val(),
+                    time: $("#select-time").val(),
                     line: $("#select-line").val(),
                     // Workaround to dynamically match stop with line
                     stop: $("#select-stop-" + $("#select-line").val().toLowerCase()).val(),
@@ -32,7 +39,7 @@ $(document).ready(function(){
                 },
                 success: function(data) {
 
-                	$("#stop-header").text(data);
+                    $("#stop-header").text(data);
                     
                     $('#partials-div').load('/user/' + id + '/stop');
                     
@@ -47,7 +54,7 @@ $(document).ready(function(){
                 },
 
                 error: function(data) {
-                	//Prevent error dumps from rendering
+                    //Prevent error dumps from rendering
                     if (data["responseText"].length > 100) {
                         
                         $("#stop-header").text("An error has occured.");
@@ -59,10 +66,10 @@ $(document).ready(function(){
 
                     restoreStopHeader();
                 }
-      		});
-      	};
+            });
+        };
+    };
 
-	});
 
 	
 		    // Define functions
@@ -77,6 +84,13 @@ $(document).ready(function(){
         
         3500);
     };
+
+
+      var getUserId = function(user_id){
+        var id = $("#user").val();
+        return id;        
+      };
+
 
     function dataDays() {
         var days = 
