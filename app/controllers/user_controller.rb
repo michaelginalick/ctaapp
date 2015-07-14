@@ -16,12 +16,12 @@ class UserController < ApplicationController
 		@user = User.find(session[:user_id])
 		generate_pin_save_user
 		@client = create_client
-		p "!!!!!!!!!!!!!!!!!!I am here!!!!!!!!!!!!!!!!!!"
+	
 		@client.account.messages.create(
 			:body => "Message from CTA App:\nYour pin is #{assign_pin}.",
 			:to => "+1#{@user.phone}",
 			:from => ENV['FROM'])
-		p "!!!!!!!!!!!!!!!!!!I am here!!!!!!!!!!!!!!!!!!"
+		
 		redirect_to(user_path(@user))
 	end
 
