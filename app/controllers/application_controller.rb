@@ -82,6 +82,8 @@ class ApplicationController < ActionController::Base
     pin = pin[0..3]
     @user.password_digest = pin
     @user.save!
+
+    return pin
   end
 
 
