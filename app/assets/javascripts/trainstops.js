@@ -18,10 +18,12 @@ $(document).ready(function(){
         } else {
 
       	    ajaxCall();
-	});
+	   };
+    });
 
 
 
+    // Define functions
 
     var ajaxCall = function() {
            $.ajax({
@@ -34,8 +36,20 @@ $(document).ready(function(){
                     // Workaround to dynamically match stop with line
                     stop: $("#select-stop-" + $("#select-line").val().toLowerCase()).val(),
                     days: {
-                            dataDays();
-                    }
+                            monday: $("#monday:checked").val(),
+                        
+                            tuesday: $("#tuesday:checked").val(),
+                                    
+                            wednesday: $("#wednesday:checked").val(),
+                                    
+                            thursday: $("#thursday:checked").val(),
+                                    
+                            friday: $("#friday:checked").val(),
+                                    
+                            saturday: $("#saturday:checked").val(),
+                                    
+                            sunday: $("#sunday:checked").val()
+                         },   
                 },
                 success: function(data) {
 
@@ -68,11 +82,11 @@ $(document).ready(function(){
                 }
             });
         };
-    };
+    });
 
 
 	
-		    // Define functions
+		    
     function restoreStopHeader() {
 
         setTimeout(
@@ -86,29 +100,11 @@ $(document).ready(function(){
     };
 
 
-      var getUserId = function(user_id){
+      var getUserId = function(){
         var id = $("#user").val();
         return id;        
       };
 
 
-    function dataDays() {
-        var days = 
-                monday: $("#monday:checked").val(),
-                        
-                tuesday: $("#tuesday:checked").val(),
-                        
-                wednesday: $("#wednesday:checked").val(),
-                        
-                thursday: $("#thursday:checked").val(),
-                        
-                friday: $("#friday:checked").val(),
-                        
-                saturday: $("#saturday:checked").val(),
-                        
-                sunday: $("#sunday:checked").val()
-        return days;        
-    };
-
-});		
+	
 

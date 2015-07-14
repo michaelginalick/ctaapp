@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
 		return Twilio::REST::Client.new(account_sid, auth_token)
 	end
 
-	def train_stuffs
+	def train_stuff
 
    		get_days
 
@@ -21,7 +21,7 @@ class ApplicationController < ActionController::Base
                             line: params[:line], 
                             user_id: params[:user_id], 
                             time: params[:time].to_time, 
-                            days: day_string)
+                            days: get_days)
       set_time_save_train
 
       #SendTimes.perform_at(@train.time, @train.id)
@@ -29,7 +29,6 @@ class ApplicationController < ActionController::Base
       if request.xhr?
         render :json => @train
       end
-    end
   end 
 
   def get_days
@@ -46,6 +45,7 @@ class ApplicationController < ActionController::Base
       	flash[:notice] = "Too many trains!"
       	redirect_to(profile_path(@user))
      end	
+     return day_string
   end
 
   def set_time_save_train
@@ -55,6 +55,12 @@ class ApplicationController < ActionController::Base
       @train.save!
     end
 
+  end
+
+  def generate_pin_save_user
+  	pin = (rand * 10000).floor.to_s
+		@user.password_digest = pin
+		@user.save!
   end
 
 

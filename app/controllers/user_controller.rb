@@ -14,10 +14,7 @@ class UserController < ApplicationController
 
 	def code	
 		@user = User.find(session[:user_id])
-		pin = (rand * 10000).floor.to_s
-		@user.password_digest = pin
-		@user.save!
-
+		generate_pin_save_user
 		@client = create_client
 		@client.account.messages.create(
 			:body => "Message from CTA App:\nYour pin is #{pin}.",
@@ -43,6 +40,12 @@ class UserController < ApplicationController
 		if request.xhr?
         render :json => @user
     end
+  end
+
+  def logout
+    session.clear
+    flash[:notice] = "See you next time."
+    redirect_to root_path
   end
 
 end

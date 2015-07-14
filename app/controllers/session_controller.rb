@@ -24,15 +24,11 @@ class SessionController < ApplicationController
       redirect_to user_path(User.find(session[:user_id])) if session[:user_id] != nil
     else
       flash[:notice] = "Phone number must be unique"
-      redirect_to root_path
+      redirect_to root_psath
     end
   end
 
-  def logout
-    session.clear
-    flash[:notice] = "See you next time."
-    redirect_to root_path
-  end
+
 
   protected
 
