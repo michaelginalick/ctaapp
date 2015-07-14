@@ -14,4 +14,5 @@
 //= require jquery_ujs
 //= require login
 //= require trainstops
+//= require deletetrain
 //= require_tree .
