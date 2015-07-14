@@ -12,7 +12,6 @@ Rails.application.routes.draw do
   get 'session/first' => 'session#first'
   post '/session/login' => 'session#login'
   
-  get '/session/logout' => 'session#logout', :as => 'logout'
 
   post '/user/confirm' => 'user#confirm', :as => 'confirm'
   post '/user/code' => 'user#code', :as => 'code'
@@ -20,6 +19,7 @@ Rails.application.routes.draw do
   post '/user/profile' => 'user#profile', :as => 'profile'
   get 'user/profile' => 'user#profile', :as => 'userprofile'
   post 'user/delete' => 'user#delete', :as => 'delete'
+  get 'user/logout' => 'user#logout', :as => 'logout'
 
 
 

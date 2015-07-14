@@ -1,5 +1,6 @@
 class UserController < ApplicationController
 
+
 	def show
 		@user = User.find(session[:user_id])
 	end
@@ -50,10 +51,11 @@ class UserController < ApplicationController
   	redirect_to root_path
   end
 
-  def logout
+   def logout
     session.clear
     flash[:notice] = "See you next time."
     redirect_to root_path
   end
+
 
 end
