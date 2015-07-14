@@ -42,6 +42,12 @@ class UserController < ApplicationController
     end
   end
 
+  def delete
+  	@user = User.destroy(session[:user_id])
+  	session.clear
+  	redirect_to root_path
+  end
+
   def logout
     session.clear
     flash[:notice] = "See you next time."

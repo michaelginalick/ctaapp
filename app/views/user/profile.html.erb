@@ -217,12 +217,9 @@
 		<h1> The Danger Zone </h1>
 		
 		<hr align="left" class="divider">
-		
-		<form id="delete-account-form" action='/users/<%= @user.id %>/delete' method="post">
-			
-			<input class="pure-button cta delete" id="delete-account" type="submit" value="Delete account">
-		
-		
+			<%= form_for(:user, url: {action: "delete"}, html: {id: "delete-account-form"}) do |f| %>
+			<input class="pure-button cta delete" type="submit" value="Delete account">
+			<%end%>
 	
 	</div>
 </div>

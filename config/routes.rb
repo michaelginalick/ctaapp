@@ -19,6 +19,7 @@ Rails.application.routes.draw do
 
   post '/user/profile' => 'user#profile', :as => 'profile'
   get 'user/profile' => 'user#profile', :as => 'userprofile'
+  post 'user/delete' => 'user#delete', :as => 'delete'
 
 
 
