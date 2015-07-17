@@ -21,8 +21,6 @@ $(document).ready(function(){
 	   };
     });
 
-
-
     // Define functions
 
     var ajaxCall = function() {
@@ -84,9 +82,6 @@ $(document).ready(function(){
         };
     });
 
-
-	
-		    
     function restoreStopHeader() {
 
         setTimeout(
