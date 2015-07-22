@@ -23,8 +23,9 @@ class ApplicationController < ActionController::Base
                           time: params[:time].to_time,
                           days: get_days)
     set_time_save_train
-
+    p "I am here"
     SendTimes.perform_at(@train.time, @train.id)
+    p "I am here"
 
     if request.xhr?
       render :json => @train
@@ -32,7 +33,7 @@ class ApplicationController < ActionController::Base
   end
 
   def get_days
-    if @user.trains.length < 3
+    if @user.trains.length < 50
       day_string = ''
 
       params[:days].each_value do |value|
@@ -72,7 +73,7 @@ class ApplicationController < ActionController::Base
       redirect_to user_path(User.find(session[:user_id])) if session[:user_id] != nil
     else
       flash[:notice] = "Phone number must be unique"
-      redirect_to root_psath
+      redirect_to root_path
     end
 
   end
