@@ -43,6 +43,8 @@ gem 'sidekiq'
 gem 'redis'
 gem 'foreman'
 gem 'dotenv-rails', :groups => [:development, :test, :production]
+gem 'sinatra', require: false
+gem 'slim' 
 
 group :test, :development do
    gem 'rspec-rails'

@@ -6,25 +6,42 @@ class SendTimes
     @train = Train.find(train_id)
 
     if @train.days.include?(Time.now.in_time_zone('Central Time (US & Canada)').wday.to_s)
+
       train_times = parse_arrivals(lines[@train.line][@train.stop], @train.stop, @train.line)
-      phone = User.find(@train.user_id).phone
+
+      user_phone
+
       send_message(train_times, phone)
-      @train.time += (60*60*24)
-      @train.save!
-      p "I am here"
-      SendTimes.perform_at(@train.time, @train.id)
+
+      train_save
+
+      send_times
+      
     else
-      @train.time += (60*60*24)
-      @train.save!
-      SendTimes.perform_at(@train.time, @train.id)
+      train_save
+      send_times
     end
+
+  end
+
+  def send_times
+    SendTimes.perform_at(@train.time, @train.id)
+  end
+
+  def train_save
+    @train.time += (60*60*24)
+    @train.save!
+  end
+
+  def user_phone
+    phone = User.find(@train.user_id).phone
+    return phone
   end
 
   def parse_arrivals(stop_name, stop_id, train_line)
     route = routes[train_line]
     train_times = "Your train times for #{train_line} Line - #{stop_name} are:" + "\n\n"
     url = "http://lapi.transitchicago.com/api/1.0/ttarrivals.aspx?key=#{ENV['CTA_KEY']}&stpid=#{stop_id}&rt=#{route}"
-
     xml_data = Net::HTTP.get_response(URI.parse(url)).body
 
     doc = Nokogiri::XML(xml_data)
@@ -48,12 +65,12 @@ class SendTimes
     message = client.account.messages.create(
       :body => "#{train_times}\n.",
       :to => "+1#{phone}",
-    :from => ENV['TWILIO_NUMBER'])
+    :from => ENV['FROM'])
   end
 
   def create_client
-    account_sid = ENV['TWILIO_SID']
-    auth_token = ENV['TWILIO_TOKEN']
+    account_sid = ENV['TWSID']
+    auth_token = ENV['TOKEN']
 
     return Twilio::REST::Client.new(account_sid, auth_token)
   end

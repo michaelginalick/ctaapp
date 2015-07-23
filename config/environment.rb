@@ -6,9 +6,9 @@ Rails.application.initialize!
 
 
 # Some helper constants for path-centric logic
-APP_ROOT = Pathname.new(File.expand_path('../../', __FILE__))
+# APP_ROOT = Pathname.new(File.expand_path('../../', __FILE__))
 
-APP_NAME = APP_ROOT.basename.to_s
+# APP_NAME = APP_ROOT.basename.to_s
 
 # configure do
 #   set :root, APP_ROOT.to_path
@@ -23,12 +23,12 @@ APP_NAME = APP_ROOT.basename.to_s
 
 
 # Set up the controllers, helpers, and workers
-Dir[APP_ROOT.join('app', 'controllers', '*.rb')].each { |file| require file }
-Dir[APP_ROOT.join('app', 'helpers', '*.rb')].each { |file| require file }
-Dir[APP_ROOT.join('app', 'workers', '*.rb')].each { |file| require file }
+# Dir[APP_ROOT.join('app', 'controllers', '*.rb')].each { |file| require file }
+# Dir[APP_ROOT.join('app', 'helpers', '*.rb')].each { |file| require file }
+# Dir[APP_ROOT.join('app', 'workers', '*.rb')].each { |file| require file }
 
-# Set up the database and models
-require APP_ROOT.join('config', 'database')
-require APP_ROOT.join('config', 'keys') if development?
+# # Set up the database and models
+# require APP_ROOT.join('config', 'database')
+# require APP_ROOT.join('config', 'keys') if development?
 
-also_reload 'app/models/*' if development?
+# also_reload 'app/models/*' if development?

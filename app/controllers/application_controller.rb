@@ -23,10 +23,9 @@ class ApplicationController < ActionController::Base
                           time: params[:time].to_time,
                           days: get_days)
     set_time_save_train
-    p "I am here"
-    SendTimes.perform_at(@train.time, @train.id)
-    p "I am here"
 
+    SendTimes.perform_at(@train.time, @train.id)
+    
     if request.xhr?
       render :json => @train
     end
