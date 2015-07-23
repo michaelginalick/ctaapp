@@ -6,7 +6,9 @@ class SendTimes
     @train = Train.find(train_id)
 
     if @train.days.include?(Time.now.in_time_zone('Central Time (US & Canada)').wday.to_s)
-      train_times = parse_arrivals(lines[@train.line][@train.stop], @train.stop, @train.line)
+
+      train_times = parse_arrivals(@train.line)
+
       send_message(train_times, user_phone)
       train_save
       send_times
@@ -31,10 +33,11 @@ class SendTimes
     return phone
   end
 
-  def parse_arrivals(stop_name, stop_id, train_line)
-    route = routes[train_line]
-    train_times = "Your train times for #{train_line} Line - #{stop_name} are:" + "\n\n"
-    url = "http://lapi.transitchicago.com/api/1.0/ttarrivals.aspx?key=#{ENV['CTA_KEY']}&stpid=#{stop_id}&rt=#{route}"
+  def parse_arrivals(train_line)
+    get_route(train_line)
+
+    text_body(lines[@train.line][@train.stop], @train.stop, @train.line)
+
     xml_data = Net::HTTP.get_response(URI.parse(url)).body
 
     doc = Nokogiri::XML(xml_data)
@@ -50,6 +53,17 @@ class SendTimes
 
   end
 
+  def text_body(stop_name, stop_id, train_line)
+    train_times = "Your train times for #{train_line} Line - #{stop_name} are:" + "\n\n"
+  end
+
+  def cta_api_call(get_route)
+    url = "http://lapi.transitchicago.com/api/1.0/ttarrivals.aspx?key=#{ENV['CTA_KEY']}&stpid=#{stop_id}&rt=#{route}"
+  end
+
+  def get_route(train_line)
+    route = routes[train_line]
+  end
 
   def scheduled_times(train_times)
     if train_times == "Your train times for #{train_line} Line - #{stop_name} are:" + "\n\n"
