@@ -6,17 +6,10 @@ class SendTimes
     @train = Train.find(train_id)
 
     if @train.days.include?(Time.now.in_time_zone('Central Time (US & Canada)').wday.to_s)
-
       train_times = parse_arrivals(lines[@train.line][@train.stop], @train.stop, @train.line)
-
-      user_phone
-
-      send_message(train_times, phone)
-
+      send_message(train_times, user_phone)
       train_save
-
       send_times
-      
     else
       train_save
       send_times
@@ -53,12 +46,19 @@ class SendTimes
       train_times += direction + ": " + time + "\n"
     end
 
+    scheduled_times(train_times)
+
+  end
+
+
+  def scheduled_times(train_times)
     if train_times == "Your train times for #{train_line} Line - #{stop_name} are:" + "\n\n"
       train_times = "No scheduled arrivals for #{train_line} Line - #{stop_name}." + "\n"
     end
 
     return train_times
   end
+
 
   def send_message(train_times, phone)
     client = create_client
