@@ -12,7 +12,6 @@ class UserController < ApplicationController
 		end
 	end
 
-
 	def code	
 		@user = User.find(session[:user_id])
 		generate_pin_save_user

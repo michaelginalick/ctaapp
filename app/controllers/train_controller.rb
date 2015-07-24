@@ -2,8 +2,7 @@ class TrainController < ApplicationController
 
   def create
     @user = User.find(session[:user_id])
-
-    train_stuff
+    create_train
   end
 
   def destroy

@@ -33,15 +33,10 @@ class SendTimes
 
   def parse_arrivals(train_line)
     get_route(train_line)
-
     text_body(lines[@train.line][@train.stop], @train.stop, @train.line)
-
     get_response
-
     format_response
-
     scheduled_times(format_response)
-
   end
 
 

@@ -13,48 +13,42 @@ class ApplicationController < ActionController::Base
     return Twilio::REST::Client.new(account_sid, auth_token)
   end
 
-  def train_stuff
-
-    get_days
+  def create_train
 
     @train = Train.create(stop: params[:stop],
                           line: params[:line],
                           user_id: params[:user_id],
                           time: params[:time].to_time,
                           days: get_days)
+
     set_time_save_train
 
     SendTimes.perform_at(@train.time, @train.id)
-    
+
     if request.xhr?
       render :json => @train
     end
   end
 
   def get_days
-    if @user.trains.length < 50
+    if @user.trains.length < 5
       day_string = ''
 
       params[:days].each_value do |value|
         day_string += value
-
-        return day_string
-
       end
+
     else
       flash[:notice] = "Too many trains!"
       redirect_to(profile_path(@user))
     end
+
     return day_string
   end
 
   def set_time_save_train
-    if Time.now > @train.time
-      #reschedule times from the past to the future so they are not run instantly
       @train.time += (60*60*24)
       @train.save!
-    end
-
   end
 
   def generate_pin_save_user
