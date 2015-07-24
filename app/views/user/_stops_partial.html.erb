@@ -28,12 +28,11 @@
 
 		</thead>
 		
-		<% n = 1 %>
-		<% @user.trains.each do |train| %>
+		<% @user.trains.each_with_index do |train, index| %>
 		
 		<tbody>
 
-			<tr id="stop-<%= n %>">
+			<tr id="stop-<%= index %>">
 
 				<td> 
 					<b><%= train.line %></b> - <%= stops[train.stop] %> 
@@ -50,12 +49,9 @@
 				</td>
 				
 				<td> 
-
-							<input class="pure-button delete unique" id="delete-train" title=<%=train.id%> type="submit" value="Delete" >
-						
+					<input class="pure-button delete unique" id="delete-train" title=<%=train.id%> type="submit" value="Delete" >
 				</td>
 			</tr>
-			<% n += 1 %>
 		<% end %>
 		</tbody>
 	</table>
