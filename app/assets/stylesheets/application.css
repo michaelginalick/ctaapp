@@ -265,6 +265,7 @@ label {
     }
     .lead {
         font-size: 2em;
+        color: ghostwhite;
     }
     #notice-header {
         font-size: 3.5em;

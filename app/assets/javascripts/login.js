@@ -1,6 +1,6 @@
 $(document).ready(function(){
 		//ensure only number are entered into phone number
-		$('#phone-number').keypress(function(event){
+		$('#phone-number, #pin-number').keypress(function(event){
 			if(event.which != 8 && isNaN(String.fromCharCode(event.which)) || event.keycode == 32) {
 				event.preventDefault();
 			};
@@ -44,6 +44,14 @@ $(document).ready(function(){
 				"width": width
 			});
 		};
+
+
+	$('#show').hide(); //Initially form wil be hidden.
+  $('#show-form').click(function() {
+  $('#show').show();//Form shows on button click
+   });
+
+
 
 });		
 
