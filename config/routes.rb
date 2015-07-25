@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   get '/session/index' => 'session#index'
   get 'session/first' => 'session#first'
   post '/session/login' => 'session#login'
+  post 'session/profile' => 'session#profile'
   
 
   post '/user/confirm' => 'user#confirm', :as => 'confirm'
