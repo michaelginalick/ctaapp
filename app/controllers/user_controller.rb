@@ -29,9 +29,10 @@ class UserController < ApplicationController
 			@train = Train.new
 			@user = User.find(session[:user_id])
 			if params[:pin]
-				@user.password_digest != params[:pin] 
-				redirect_to session_notice_path
-				flash[:notice] = "Pin is not correct."
+				if @user.password_digest != params[:pin] 
+						redirect_to session_notice_path
+						flash[:notice] = "Pin is not correct."
+				end
 			end
 	end
 
