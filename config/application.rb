@@ -10,7 +10,6 @@ Bundler.require(*Rails.groups)
 module Ctaapp
   class Application < Rails::Application
      config.before_configuration do
-        config.time_zone = 'Central Time (US & Canada)'
         config.allow_concurrency = false
         config.autoload_paths += %W(#{config.root}/app/workers)
         env_file = File.join(Rails.root, 'config', 'environment_variables.yml')

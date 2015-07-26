@@ -38,10 +38,12 @@
 					<b><%= train.line %></b> - <%= stops[train.stop] %> 
 				</td>
 
-				<% if Time.zone.now %>
-					<td> <%= (train.time + Time.zone.now.strftime("%I:%M %p")) %> </td>
+				<% if Time.now.dst? %>
+					<td> this is here </td>
+					<td> <%= (train.time + Time.zone_offset('CDT')).strftime("%I:%M %p") %> </td>
 				<% else %>
-					<td> <%= (train.time + Time.zone.now.strftime("%I:%M %p")) %> </td>
+				<td> this is here 2</td>
+					<td> <%= (train.time + Time.zone_offset('CDT') - 3600).strftime("%I:%M %p") %> </td>
 				<% end %>
 
 				<td> 
