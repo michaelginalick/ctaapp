@@ -21,7 +21,11 @@ class ApplicationController < ActionController::Base
                           time: params[:time].to_time,
                           days: get_days)
 
-    set_time_save_train
+    
+    if Time.now > @train.time
+      @train.time += (60*60*24) #reschedule times from the past to the future so they are not run instantly
+      @train.save!
+    end
 
     SendTimes.perform_at(@train.time, @train.id)
 
@@ -46,10 +50,6 @@ class ApplicationController < ActionController::Base
     return day_string
   end
 
-  def set_time_save_train
-      @train.time += (60*60*24)
-      @train.save!
-  end
 
   def generate_pin_save_user
     pin = (rand * 10000).floor.to_s
