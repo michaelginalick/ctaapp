@@ -41,7 +41,7 @@
 				<% if Time.now.dst? %>
 					<td> <%= (train.time + Time.zone_offset('CDT')).strftime("%I:%M %p") %> </td>
 				<% else %>
-					<td> <%= (train.time.strftime("%I:%M %p") %> </td>
+					<td> <%= (train.time.strftime("%I:%M %p")) %> </td>
 				<% end %>
 
 				<td> 
