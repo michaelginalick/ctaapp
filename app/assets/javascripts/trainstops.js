@@ -50,8 +50,6 @@ $(document).ready(function(){
                          },   
                 },
                 success: function(data) {
-
-                    $("#stop-header").text(data);
                     
                     $('#partials-div').load('/user/' + getUserId() + '/stop');
                     
