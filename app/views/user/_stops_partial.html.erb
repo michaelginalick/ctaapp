@@ -39,9 +39,9 @@
 				</td>
 
 				<% if Time.zone.now %>
-					<td> <%= (train.time + Time.zone.now.strftime("%I:%M %p") %> </td>
+					<td> <%= (train.time + Time.zone.now.strftime("%I:%M %p")) %> </td>
 				<% else %>
-					<td> <%= (train.time + Time.zone.now.strftime("%I:%M %p") %> </td>
+					<td> <%= (train.time + Time.zone.now.strftime("%I:%M %p")) %> </td>
 				<% end %>
 
 				<td> 
