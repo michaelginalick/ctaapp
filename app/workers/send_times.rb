@@ -1,109 +1,64 @@
+
 class SendTimes
-  include Sidekiq::Worker
-  sidekiq_options :retry => false
+    include Sidekiq::Worker
+    sidekiq_options :retry => false
 
-  def perform(train_id)
-    @train = Train.find(train_id)
-
-    if @train.days.include?(Time.now.in_time_zone('Central Time (US & Canada)').wday.to_s)
-      train_times = parse_arrivals(@train.line)
-      send_message(train_times, user_phone)
-      train_save
-      send_times
-    else
-      train_save
-      send_times
+    def perform(train_id)
+        @train = Train.find(train_id)
+        
+        if @train.days.include?(Time.now.in_time_zone('Central Time (US & Canada)').wday.to_s)
+            train_times = parse_arrivals(lines[@train.line][@train.stop], @train.stop, @train.line)
+            phone = User.find(@train.user_id).phone
+            send_message(train_times, phone)
+            @train.time += (60*60*24)
+            @train.save!
+            SendTimes.perform_at(@train.time, @train.id)
+        else
+            @train.time += (60*60*24)
+            @train.save!
+            SendTimes.perform_at(@train.time, @train.id)
+        end
     end
 
-  end
+    def parse_arrivals(stop_name, stop_id, train_line)
+        route = routes[train_line]
+        train_times = "Your train times for #{train_line} Line - #{stop_name} are:" + "\n\n"
+        url = "http://lapi.transitchicago.com/api/1.0/ttarrivals.aspx?key=#{ENV['CTA_KEY']}&stpid=#{stop_id}&rt=#{route}"
 
-  def send_times
-    SendTimes.perform_at(@train.time, @train.id)
-  end
+        p url
 
-  def train_save
-    @train.time += (60*60*24)
-    @train.save!
-  end
+        xml_data = Net::HTTP.get_response(URI.parse(url)).body
 
-  def user_phone
-    phone = User.find(@train.user_id).phone
-    return phone
-  end
+        doc = Nokogiri::XML(xml_data)
 
-  def parse_arrivals(train_line)
-    get_route(train_line)
-    text_body(lines[@train.line][@train.stop], @train.stop, @train.line)
-    get_response
-    format_response
-    scheduled_times(format_response)
-  end
+        doc.xpath('//eta').each do |arrival|
+            time = arrival.at_xpath('arrT').content
+            direction = arrival.at_xpath('destNm').content
+            time = time.to_time.strftime("%I:%M %p")
+            train_times += direction + ": " + time + "\n"
+        end
 
+        if train_times == "Your train times for #{train_line} Line - #{stop_name} are:" + "\n\n"
+            train_times = "No scheduled arrivals for #{train_line} Line - #{stop_name}." + "\n"
+        end
 
-  def format_response
-    get_response.xpath('//eta').each do |arrival|
-      time = arrival.at_xpath('arrT').content
-      direction = arrival.at_xpath('destNm').content
-      time = time.to_time.strftime("%I:%M %p")
-      return_text_body += direction + ": " + time + "\n"
-    end
-    return return_text_body
-  end
-
-
-  def get_response
-    xml_data = Net::HTTP.get_response(URI.parse(return_api_url_call)).body
-    doc = Nokogiri::XML(xml_data)
-
-    return doc
-  end
-
-  def return_text_body
-    text_body
-  end
-
-
-  def text_body(stop_name, train_line)
-    train_times = "Your train times for #{train_line} Line - #{stop_name} are:" + "\n\n"
-  end
-
-  def return_api_url_call
-    cta_api_call
-  end
-
-  def cta_api_call(stop_id, get_route)
-    url = "http://lapi.transitchicago.com/api/1.0/ttarrivals.aspx?key=#{ENV['CTA_KEY']}&stpid=#{stop_id}&rt=#{route}"
-    return url
-  end
-
-  def get_route(train_line)
-    route = routes[train_line]
-  end
-
-  def scheduled_times(train_times)
-    if train_times == "Your train times for #{train_line} Line - #{stop_name} are:" + "\n\n"
-      train_times = "No scheduled arrivals for #{train_line} Line - #{stop_name}." + "\n"
+        return train_times
     end
 
-    return train_times
-  end
+    def send_message(train_times, phone)
+        client = create_client
+        message = client.account.messages.create(
+            :body => "#{train_times}\nSent by working title.",
+            :to => "+1#{phone}",
+        :from => ENV['FROM'])
+    end
 
-
-  def send_message(train_times, user_phone)
-    client = create_client
-    message = client.account.messages.create(
-      :body => "#{train_times}\n.",
-      :to => "+1#{user_phone}",
-    :from => ENV['FROM'])
-  end
-
-  def create_client
-    account_sid = ENV['TWSID']
-    auth_token = ENV['TOKEN']
-
-    return Twilio::REST::Client.new(account_sid, auth_token)
-  end
-
+    def create_client
+        account_sid = ENV['TWSID']
+        auth_token = ENV['TOKEN']
+        
+        return Twilio::REST::Client.new(account_sid, auth_token)
+    end
   def routes
     routes = {}
 
