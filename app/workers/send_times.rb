@@ -27,16 +27,16 @@ class SendTimes
   def parse_arrivals(stop_name, stop_id, train_line)
     route = routes[train_line]
 
-    train_text = start_text(train_line, stop_name)
+    train_text_info = start_text(train_line, stop_name)
 
-    url = api_hit(route, stop_id)
+    url = api_hit(stop_id, route)
 
     xml_data = Net::HTTP.get_response(URI.parse(url)).body
 
 
-    cta_response(xml_data, train_text)
-    
-    text_body = begin_text_body(cta_response(xml_data, train_text), stop_name)
+    train_text = cta_response(xml_data, train_text_info)
+
+    text_body = begin_text_body(train_text, stop_name)
 
     return text_body
   end
@@ -50,6 +50,7 @@ class SendTimes
   end
 
   def cta_response(xml_data, train_text)
+    train_text = train_text
     doc = Nokogiri::XML(xml_data)
 
     doc.xpath('//eta').each do |arrival|
