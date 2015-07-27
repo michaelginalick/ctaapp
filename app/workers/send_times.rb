@@ -3,7 +3,7 @@ class SendTimes
   include Sidekiq::Worker
   sidekiq_options :retry => false
 
-  def find_train
+  def find_train(train_id)
     @train = Train.find(train_id)
   end
 
