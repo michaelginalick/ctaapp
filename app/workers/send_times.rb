@@ -34,12 +34,11 @@ class SendTimes
     xml_data = Net::HTTP.get_response(URI.parse(url)).body
 
 
-    more_text = cta_response(xml_data, train_text)
+    cta_response(xml_data, train_text)
+    
+    text_body = begin_text_body(cta_response(xml_data, train_text), stop_name)
 
-
-    text_body = begin_text_body(train_text, stop_name)
-
-    return text_body += more_text
+    return text_body
   end
 
   def api_hit(stop_id, route)
