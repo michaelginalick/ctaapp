@@ -29,9 +29,9 @@ class SendTimes
 
     start_text(train_line, stop_name)
 
-    xml_data = Net::HTTP.get_response(URI.parse(url)).body
+    url = api_hit(route, stop_id)
 
-    api_hit(route, stop_id)
+    xml_data = Net::HTTP.get_response(URI.parse(url)).body
 
 
     cta_response(xml_data)
