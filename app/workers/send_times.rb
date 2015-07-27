@@ -34,7 +34,7 @@ class SendTimes
     xml_data = Net::HTTP.get_response(URI.parse(url)).body
 
 
-    cta_response(xml_data)
+    cta_response(xml_data, train_text)
 
 
     begin_text_body(train_text)
@@ -48,17 +48,17 @@ class SendTimes
     train_times = "Your train times for #{train_line} Line - #{stop_name} are:" + "\n\n"
   end
 
-  def cta_response(xml_data)
+  def cta_response(xml_data, train_text)
     doc = Nokogiri::XML(xml_data)
 
     doc.xpath('//eta').each do |arrival|
       time = arrival.at_xpath('arrT').content
       direction = arrival.at_xpath('destNm').content
       time = time.to_time.strftime("%I:%M %p")
-      train_times += direction + ": " + time + "\n"
+      train_text += direction + ": " + time + "\n"
     end
 
-    return train_times
+    return train_text
   end
 
   def user_phone
