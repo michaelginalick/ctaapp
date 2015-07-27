@@ -40,7 +40,7 @@ class SendTimes
     begin_text_body(train_times)
   end
 
-  def api_hit
+  def api_hit(stop_id, route)
     url = "http://lapi.transitchicago.com/api/1.0/ttarrivals.aspx?key=#{ENV['CTA_KEY']}&stpid=#{stop_id}&rt=#{route}"
   end
 
