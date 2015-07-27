@@ -12,11 +12,11 @@ class SendTimes
 
     if central_time_zone?
 
-      train_times = parse_arrivals(lines[@train.line][@train.stop], @train.stop, @train.line)
+      train_info = parse_arrivals(lines[@train.line][@train.stop], @train.stop, @train.line)
 
       user_phone
 
-      send_message(train_times, phone)
+      send_message(train_info, user_phone)
 
       set_time_save
     else
@@ -27,7 +27,7 @@ class SendTimes
   def parse_arrivals(stop_name, stop_id, train_line)
     route = routes[train_line]
 
-    train_times = start_text(train_line, stop_name)
+    train_text = start_text(train_line, stop_name)
 
     url = api_hit(route, stop_id)
 
@@ -37,7 +37,7 @@ class SendTimes
     cta_response(xml_data)
 
 
-    begin_text_body(train_times)
+    begin_text_body(train_text)
   end
 
   def api_hit(stop_id, route)
