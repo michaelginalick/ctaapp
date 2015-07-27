@@ -37,7 +37,7 @@ class SendTimes
     cta_response(xml_data, train_text)
 
 
-    begin_text_body(train_text)
+    begin_text_body(train_text, stop_name)
   end
 
   def api_hit(stop_id, route)
@@ -76,17 +76,17 @@ class SendTimes
   end
 
 
-  def begin_text_body(train_times)
-    if train_times == "Your train times for #{train_line} Line - #{stop_name} are:" + "\n\n"
-      train_times = "No scheduled arrivals for #{train_line} Line - #{stop_name}." + "\n"
+  def begin_text_body(train_times, stop_name)
+    if train_times == "Your train times for #{train_times} Line - #{stop_name} are:" + "\n\n"
+      train_times = "No scheduled arrivals for #{train_times} Line - #{stop_name}." + "\n"
     end
     return train_times
   end
 
-  def send_message(train_times, phone)
+  def send_message(train_info, phone)
     client = create_client
     message = client.account.messages.create(
-      :body => "#{train_times}\nSent by working title.",
+      :body => "#{train_info}\nSent by working title.",
       :to => "+1#{phone}",
     :from => ENV['FROM'])
   end
