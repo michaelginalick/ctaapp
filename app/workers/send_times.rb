@@ -27,7 +27,7 @@ class SendTimes
   def parse_arrivals(stop_name, stop_id, train_line)
     route = routes[train_line]
 
-    start_text(train_line, stop_name)
+    train_times = start_text(train_line, stop_name)
 
     url = api_hit(route, stop_id)
 
