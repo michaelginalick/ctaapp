@@ -37,7 +37,9 @@ class SendTimes
     cta_response(xml_data, train_text)
 
 
-    begin_text_body(train_text, stop_name)
+    text_body = begin_text_body(train_text, stop_name)
+
+    return text_body
   end
 
   def api_hit(stop_id, route)
