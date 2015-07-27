@@ -8,7 +8,7 @@ class SendTimes
   end
 
   def perform(train_id)
-    find_train
+    find_train(train_id)
 
     if central_time_zone?
 
