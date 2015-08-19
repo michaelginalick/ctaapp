@@ -45,7 +45,7 @@ class SendTimes
 	def send_message(train_times, phone)
 		client = create_client
 		message = client.account.messages.create(
-			:body => "#{train_times}\nSent by RightOnTracker, a Stu Pearlman app.",
+			:body => "#{train_times}.",
 			:to => "+1#{phone}",
 		:from => ENV['TWILIO_NUMBER'])
 	end
