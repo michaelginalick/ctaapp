@@ -23,7 +23,7 @@ class ApplicationController < ActionController::Base
 
     
     if Time.now > @train.time
-      @train.time += (60*60*24) #reschedule times from the past to the future so they are not run instantly
+      @train.time += (60*60*24) 
       @train.save!
     end
 
